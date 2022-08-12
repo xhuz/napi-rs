@@ -201,7 +201,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build
         id: build
-        uses: vmactions/freebsd-vm@v0.2.3
+        uses: vmactions/freebsd-vm@v0
         env:
           DEBUG: 'napi:*'
           RUSTUP_HOME: /usr/local/rustup
@@ -212,9 +212,9 @@ jobs:
           usesh: true
           mem: 3000
           prepare: |
-            pkg install -y curl node14 python2
+            pkg install -y curl node16 python2
             curl -qL https://www.npmjs.com/install.sh | sh
-            npm install -g yarn
+            npm install --location=global --ignore-scripts yarn
             curl https://sh.rustup.rs -sSf --output rustup.sh
             sh rustup.sh -y --profile minimal --default-toolchain stable
             export PATH="/usr/local/cargo/bin:$PATH"
